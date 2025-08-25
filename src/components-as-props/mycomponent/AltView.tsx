@@ -13,27 +13,20 @@ function times(count: number): number[] {
  * This shouldn't have a lot of logic in it - that's the data component's job.
  * Instead, this component should be about presentation, e.g. grid vs. table view.
  */
-export default function MyComponentView(props: MyComponentViewProps) {
-  const { getRowCount, getColumnCount, getRow } = props;
+export default function MyComponentAltView(props: MyComponentViewProps) {
+  const { getRowCount, getRow } = props;
 
   const rows = getRowCount();
-  const cols = getColumnCount();
 
   return (
     <div>
-      <p>My Data View</p>
-      <table>
+      <p>My Alternate Data View</p>
+      <ol>
         {times(rows).map((i) => {
           const row = getRow(i);
-          return (
-            <tr key={`row-${row[0]}`}>
-              {times(cols).map((j) => (
-                <td key={`row${i}col${j}`}>{row[j]}</td>
-              ))}
-            </tr>
-          );
+          return <li key={`row-${row[0]}`}>{row.join(" - ")}</li>;
         })}
-      </table>
+      </ol>
     </div>
   );
 }
